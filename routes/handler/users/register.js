@@ -1,7 +1,5 @@
 const bcrypt = require('bcrypt');
 const {User} = require('../../../models');
-const isBase64 = require('is-base64');
-const base64Img = require('base64-img');
 const Validator = require('fastest-validator');
 const v = new Validator;
 

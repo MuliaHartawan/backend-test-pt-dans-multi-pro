@@ -52,7 +52,6 @@ npm run test
 - [Sequelize](https://sequelize.org/) - Object-Relational Mapping (ORM) library for Node.js
 - [mysql2](https://www.npmjs.com/package/mysql2) - MySQL driver for Node.js
 - [Jest](https://jestjs.io/) - Testing framework
-[![N|Solid](https://cldup.com/dTxpPi9lDf.thumb.png)](https://nodesource.com/products/nsolid)
 
 ## License
 This project is licensed under the MIT License.

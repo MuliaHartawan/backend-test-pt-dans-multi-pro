@@ -1,4 +1,4 @@
-const {Company} = require('../../../models');
+const {Job} = require('../../../models');
 
 module.exports = async (req, res) => {
 
@@ -9,22 +9,23 @@ module.exports = async (req, res) => {
       offset,
       limit: parseInt(limit),
       order: [['createdAt', 'DESC']],
-      include: [{ model: Job, as: 'job' }],
+      include: [{ model: Company, as: 'company' }],
     };
 
     // Search by Title and/or Description
     if (search) {
-        options.where = {
-          [Op.or]: [
-            { name: { [Op.like]: `%${search}%` } },
-          ],
-        };
-      }
+      options.where = {
+        [Op.or]: [
+          { title: { [Op.like]: `%${search}%` } },
+          { description: { [Op.like]: `%${search}%` } },
+        ],
+      };
+    }
 
-    const companies = await Company.findAndCountAll(options);
+    const jobs = await Job.findAndCountAll(options);
 
     return res.json({
         status : 'success',
-        data : companies,
+        data : jobs,
     });
 }

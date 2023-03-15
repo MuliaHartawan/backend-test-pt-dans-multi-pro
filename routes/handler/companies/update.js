@@ -33,9 +33,9 @@ module.exports = async (req, res) => {
 
     const { name, location, website } = req.body;
 
-    company.name = name;
-    company.location = location;
-    company.website = website;
+    company.name = name || company.name;
+    company.location = location || company.location;
+    company.website = website || company.website;
     await company.save();
 
     return res.json({

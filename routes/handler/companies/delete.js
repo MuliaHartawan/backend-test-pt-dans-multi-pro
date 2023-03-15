@@ -6,7 +6,9 @@ module.exports = async (req, res) => {
 
     const company = await Company.findByPk(companyId);
     if (!company) {
-      return res.status(404).json({ message: 'Company not found' });
+      return res.status(404).json({ 
+        status : 'success',
+        message: 'Company not found' });
     }
     await company.destroy();
 

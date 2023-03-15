@@ -1,41 +1,42 @@
 const { Model } = require('sequelize');
 
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Job extends Model {
     static associate(models) {
-        User.hasMany(models.Job, {
-            foreignKey: 'userId',
-        });
+      Job.belongsTo(models.User, {
+        foreignKey: 'userId',
+      });
     }
   }
 
-  User.init(
+  Job.init(
     {
-      username: {
+      title: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      password: {
+      description: {
+        type: DataTypes.TEXT,
+        allowNull: false,
+      },
+      location: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      email: {
-        type: DataTypes.STRING,
+      full_time: {
+        type: DataTypes.BOOLEAN,
         allowNull: false,
-      },
-      role: {
-        type: DataTypes.ENUM('admin', 'recruiter', 'jobseeker'),
-        allowNull: false,
+        defaultValue: false,
       },
     },
     {
       sequelize,
-      modelName: 'User',
+      modelName: 'Job',
       timestamps: true,
       createdAt: 'createdAt',
       updatedAt: 'updatedAt',
     }
   );
 
-  return User;
+  return Job;
 };

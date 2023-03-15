@@ -25,8 +25,9 @@ module.exports = async(req, res) => {
     }
 
     const user = await User.findOne({
-        attributes : ['id', 'name', 'avatar', 'email', 'password'],
-        where : {email: req.body.email}
+        attributes :  { exclude: ['password'] },
+        where : {email: req.body.email},
+        include: [{ model: Job, as: 'job' }]
     })
 
     if (!user){
@@ -45,10 +46,7 @@ module.exports = async(req, res) => {
     }
 
     data = {
-        id : user.id,
-        username : user.username,
-        email : user.email,
-        role : user.role,
+        user
     }
 
     const token = jwt.sign({data}, JWT_SECRET_KEY, {expiresIn : JWT_ACCESS_TOKEN_EXPIRED});
